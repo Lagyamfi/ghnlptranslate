@@ -11,9 +11,8 @@ import torch
 
 @st.cache(suppress_st_warning=True, persist=True, show_spinner=False)
 def get_models():
-    tokenizer = joblib.load("./tokenizer.pkl")
-    model = joblib.load("./model.pkl")
-
+    tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-tw")
+    model = AutoModelWithLMHead.from_pretrained("Helsinki-NLP/opus-mt-en-tw")
     return tokenizer, model
 
 loaded_tokenizer, loaded_model = get_models()
