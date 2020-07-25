@@ -1,10 +1,19 @@
 import streamlit as st
 from PIL import Image
 import pickle
+from transformers import AutoTokenizer, AutoModelWithLMHead
 
 # load model and tokenizer
-loaded_model = pickle.load(open("./model.pkl", 'rb'))
-loaded_tokenizer = pickle.load(open("./tokenizer.pkl", 'rb'))
+#loaded_model = pickle.load(open("./model.pkl", 'rb'))
+#loaded_tokenizer = pickle.load(open("./tokenizer.pkl", 'rb'))
+
+@st.cache(suppress_st_warning=True, persist=True, show_spinner=False)
+def get_models():
+    tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-tw")
+    model = AutoModelWithLMHead.from_pretrained("Helsinki-NLP/opus-mt-en-tw")
+    return tokenizer, model
+
+loaded_tokenizer, loaded_model = get_models()
 
 def translate(input_word='', model=loaded_model, tokenizer=loaded_tokenizer):
     inputs = tokenizer.encode(input_word, return_tensors="pt")
