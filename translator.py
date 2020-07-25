@@ -1,16 +1,19 @@
 import streamlit as st
 from PIL import Image
-import pickle
-from transformers import AutoTokenizer, AutoModelWithLMHead
+import joblib
+import torch
+#from transformers import AutoTokenizer, AutoModelWithLMHead
 
 # load model and tokenizer
-#loaded_model = pickle.load(open("./model.pkl", 'rb'))
-#loaded_tokenizer = pickle.load(open("./tokenizer.pkl", 'rb'))
+#loaded_model = joblib.load("./model.pkl")
+#loaded_tokenizer = joblib.load("./tokenizer.pkl")
+
 
 @st.cache(suppress_st_warning=True, persist=True, show_spinner=False)
 def get_models():
-    tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-tw")
-    model = AutoModelWithLMHead.from_pretrained("Helsinki-NLP/opus-mt-en-tw")
+    tokenizer = joblib.load("./tokenizer.pkl")
+    model = joblib.load("./model.pkl")
+
     return tokenizer, model
 
 loaded_tokenizer, loaded_model = get_models()
