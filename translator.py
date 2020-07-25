@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 import joblib
 import torch
-#from transformers import AutoTokenizer, AutoModelWithLMHead
+from transformers import AutoTokenizer, AutoModelWithLMHead
 
 # load model and tokenizer
 #loaded_model = joblib.load("./model.pkl")
