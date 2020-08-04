@@ -47,6 +47,8 @@ alt_translation = st.text_input("Please enter an alternative translation if appl
 
 run_details["alt translation"] = alt_translation
 
+print(run_details)
+
 logger = open("output.txt", "a")
 print(*list(run_details.values()), sep=",", end="\n", file=logger)
 logger.close()
